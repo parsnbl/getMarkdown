@@ -13,3 +13,13 @@
 
 # Issue : open multiple links
 https://stackoverflow.com/questions/57845546/chrome-contextmenus-how-to-get-html-instead-of-string
+
+
+## Todos
+1. options.html and options.js - add options for using page title of copied links or not
+2. offscreen.html/offscreen.js - pass selection to clipboard successfully
+3. Put everything in folders
+4. background.js - make selection into html
+5. background.js - build better markdown parser for html using regex to allow for text formatting as well
+6. build test suite for everything in jasmine
+7. setup webpack so as to use react

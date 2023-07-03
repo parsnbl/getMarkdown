@@ -6,11 +6,13 @@ let contextMenuItem = {
     "title": "MarkDone",
     "contexts": ["selection"]
 };
+chrome.runtime.onInstalled.addListener(()=>{
+    chrome.contextMenus.create(contextMenuItem);
+}, () => chrome.runtime.lastError); // ignore errors about an existing id
 
-chrome.contextMenus.create(contextMenuItem);
 
 chrome.contextMenus.onClicked.addListener((clickData) => {
-    linkHandler(clickData);
+    console.log(clickData);
 })
 
 let headers = {}
@@ -30,6 +32,8 @@ let linkClickData = {
     "pageUrl": "https://developer.chrome.com/docs/extensions/mv3/manifest/",
     "selectionText": "version"
 }
+
+
 
 async function getPageTitle(url) {
     const response = await fetch(url, options);
@@ -90,3 +94,32 @@ async function linkHandler(clickData) {
   async function addToClipboardV2(value) {
     navigator.clipboard.writeText(value);
   }
+
+
+  /* GET HTML CODE FROM SO
+chrome.contextMenus.onClicked.addListener((info, tab) => {
+  chrome.tabs.executeScript(tab.id, {
+    code: `(${getSelectedHtml})()`,
+    frameId: info.frameId,
+    matchAboutBlank: true,
+    runAt: 'document_start',
+  }, data => {
+    if (chrome.runtime.lastError) {
+      alert('Error: ' + chrome.runtime.lastError.message);
+    } else {
+      prompt('HTML', data[0]);
+    }
+  });
+});
+// this function's code will be executed as a content script in the web page
+function getSelectedHtml() {
+  const sel = getSelection();
+  let html;
+  if (sel.rangeCount) {
+    const div = document.createElement('div');
+    div.appendChild(sel.getRangeAt(0).cloneContents());
+    html = div.innerHTML;
+  }
+  return html || '';
+}
+  */

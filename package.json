@@ -10,5 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "chrome-types": "^0.1.208"
+  },
+  "devDependencies": {
+    "jasmine": "^5.0.2"
   }
 }

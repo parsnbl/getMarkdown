@@ -10,3 +10,6 @@
   - https://developer.chrome.com/blog/web-custom-formats-for-the-async-clipboard-api/
   - https://web.dev/async-clipboard/
   - https://developer.chrome.com/docs/extensions/mv3/messaging/
+
+# Issue : open multiple links
+https://stackoverflow.com/questions/57845546/chrome-contextmenus-how-to-get-html-instead-of-string

@@ -6,7 +6,8 @@
   "permissions": [
     "contextMenus",
     "offscreen",
-    "clipboardWrite"
+    "clipboardWrite",
+    "activeTab"
   ],
   "background": {
     "service_worker": "background.js",

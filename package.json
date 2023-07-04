@@ -16,7 +16,12 @@
     "chrome-types": "^0.1.208",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-feather": "^2.0.10"
+    "react-feather": "^2.0.10",
+    "rehype-parse": "^8.0.4",
+    "rehype-remark": "^9.1.2",
+    "remark-gfm": "^3.0.1",
+    "remark-stringify": "^10.0.3",
+    "unified": "^10.1.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.14",

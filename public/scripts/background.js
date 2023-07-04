@@ -6,14 +6,55 @@ let contextMenuItem = {
     "title": "MarkDone",
     "contexts": ["selection"]
 };
+
+chrome.contextMenus.create(contextMenuItem,() => chrome.runtime.lastError); // ignore errors about an existing id
+
+/*
 chrome.runtime.onInstalled.addListener(()=>{
-    chrome.contextMenus.create(contextMenuItem);
-}, () => chrome.runtime.lastError); // ignore errors about an existing id
+    chrome.contextMenus.create(contextMenuItem,() => chrome.runtime.lastError);
+}); // ignore errors about an existing id
+*/
+/* Manifest 2 version
+chrome.contextMenus.onClicked.addListener((info, tab) => {
+    chrome.tabs.executeScript(tab.id, {
+      code: `(${getSelectedHtml})()`,
+      frameId: info.frameId,
+      matchAboutBlank: true,
+      runAt: 'document_start',
+    }, data => {
+      if (chrome.runtime.lastError) {
+        alert('Error: ' + chrome.runtime.lastError.message);
+      } else {
+        prompt('HTML', data[0]);
+      }
+    });
+  });
+  */
+ // Manifest 3 version
+  chrome.contextMenus.onClicked.addListener((info, tab) => {
+    chrome.scripting.executeScript({
+        target: {tabId : tab.id, frameIds : [info.frameId]},
+        func: getSelectedHtml,
+    }).then((data) => {
+        if (chrome.runtime.lastError) {
+          console.log('Error: ' + chrome.runtime.lastError.message);
+        } else {
+          console.log('HTML', data[0]);
+        }});
+  })
 
 
-chrome.contextMenus.onClicked.addListener((clickData) => {
-    console.log(clickData);
-})
+  // this function's code will be executed as a content script in the web page
+  function getSelectedHtml() {
+    const sel = getSelection();
+    let html;
+    if (sel.rangeCount) {
+      const div = document.createElement('div');
+      div.appendChild(sel.getRangeAt(0).cloneContents());
+      html = div.innerHTML;
+    }
+    return html || '';
+  }
 
 let headers = {}
 
@@ -95,31 +136,4 @@ async function linkHandler(clickData) {
     navigator.clipboard.writeText(value);
   }
 
-
-  /* GET HTML CODE FROM SO
-chrome.contextMenus.onClicked.addListener((info, tab) => {
-  chrome.tabs.executeScript(tab.id, {
-    code: `(${getSelectedHtml})()`,
-    frameId: info.frameId,
-    matchAboutBlank: true,
-    runAt: 'document_start',
-  }, data => {
-    if (chrome.runtime.lastError) {
-      alert('Error: ' + chrome.runtime.lastError.message);
-    } else {
-      prompt('HTML', data[0]);
-    }
-  });
-});
-// this function's code will be executed as a content script in the web page
-function getSelectedHtml() {
-  const sel = getSelection();
-  let html;
-  if (sel.rangeCount) {
-    const div = document.createElement('div');
-    div.appendChild(sel.getRangeAt(0).cloneContents());
-    html = div.innerHTML;
-  }
-  return html || '';
-}
-  */
+ 

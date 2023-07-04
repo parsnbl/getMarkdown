@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "Markdone",
+  "description": "WIP",
+  "version": "1.0",
+  "permissions": [
+    "contextMenus",
+    "offscreen",
+    "clipboardWrite",
+    "activeTab",
+    "scripting"
+  ],
+  "background": {
+    "service_worker": "src/scripts/background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*/*"],
+      "js": [
+        "node_modules/unified/lib/index.js",
+        "node_modules/rehype-parse/lib/index.js",
+        "node_modules/rehype-remark/lib/index.js",
+        "node_modules/remark-stringify/lib/index.js"
+        ]
+      }
+    ],
+  "host_permissions": [
+    "https://*/*", 
+    "http://*/*"
+  ]
+}

@@ -31,7 +31,16 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
   });
   */
  // Manifest 3 version
-  chrome.contextMenus.onClicked.addListener((info, tab) => {
+chrome.contextMenus.onClicked.addListener(async (info, tab) => {
+  const response = await chrome.tabs.sendMessage(tab.id, {
+    type: 'get-html-select',
+    target: 'content',
+    data: {}
+  });
+  console.log('Resp', response);
+});
+ /* Version where content is executed programmatically
+ chrome.contextMenus.onClicked.addListener((info, tab) => {
     chrome.scripting.executeScript({
         target: {tabId : tab.id, frameIds : [info.frameId]},
         func: getSelectedHtml,
@@ -42,7 +51,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
           console.log('HTML', data[0]);
         }});
   })
-
+*/
 
   // this function's code will be executed as a content script in the web page
   function getSelectedHtml() {

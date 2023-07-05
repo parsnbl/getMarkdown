@@ -18,15 +18,16 @@
     {
       "matches": ["https://*/*"],
       "js": [
-        "node_modules/unified/lib/index.js",
-        "node_modules/rehype-parse/lib/index.js",
-        "node_modules/rehype-remark/lib/index.js",
-        "node_modules/remark-stringify/lib/index.js"
-        ]
+        "src/scripts/content.js"
+        ],
+        "run_at": "document_start"
       }
     ],
   "host_permissions": [
     "https://*/*", 
     "http://*/*"
-  ]
+  ],
+  "externally_connectable": {
+    "matches": ["https://*/*"]
+  }
 }

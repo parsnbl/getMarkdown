@@ -63,6 +63,26 @@ link.replace(/<a href="(.+)">(.*)<\/a>/g, '[$2]($1)')
 
 //review and replace using forEach for rulesz
 
+const headerRules = [
+  [/<h1>(.*)<\/h1>/g, '# $1'],
+  [/<h2>(.*)<\/h2>/g, '## $1'],
+  [/<h3>(.*)<\/h3>/g, '### $1'],
+  [/<h4>(.*)<\/h4>/g, '#### $1'],
+  [/<h5>(.*)<\/h5>/g, '##### $1'],
+  [/<h6>(.*)<\/h6>/g, '###### $1']
+]
+
+const emphasisRules = [
+  [/<em><strong>(.*)<\/strong><\/em>|<strong><em>(.*)<\/em><\/strong>/g, '***$1***' ],
+  [/<strong>(.*)<\/strong>/g, '**$1**'],
+  [/<em>(.*)<\/em>/g, '*$1*'],
+  [/<p>(.*)<\/p>/g, "\n$1"]
+]
+
+const blockquoteRules = [
+  [/<blockquote>(.*)<\/blockquote>/g, '>$1'],
+]
+
 function parseMd(md){
   
     //ul

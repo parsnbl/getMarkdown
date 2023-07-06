@@ -28,8 +28,24 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         });
         */
     }
+    if (request.target === 'content' && request.type === 'copy-to-clipboard') {
+        copyToTheClipboard(request.data);
+        const msg = 'copySuccessful'
+        sendResponse(msg);
+    }
 });
 
+async function copyToTheClipboard(textToCopy){
+    const el = document.createElement('textarea');
+    el.value = textToCopy;
+    el.setAttribute('readonly', '');
+    el.style.position = 'absolute';
+    el.style.left = '-9999px';
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+}
 
 function getSelectedHtml() {
     const sel = getSelection();
@@ -53,5 +69,7 @@ function parseToMd(text) {
 }
 
 function convertRelativeURLsToAbsolute(htmlString, currentURL) {
-    return htmlString.replaceAll(/href="(?!https:\/\/|http:\/\/)(.*)"/gi, "href="+currentURL+'$1"' )
+    return htmlString
+        .replaceAll(/href="(?!https:\/\/|http:\/\/)(.*)"/gi, "href="+currentURL+'$1"')
+        .replaceAll(/src="(?!https:\/\/|http:\/\/)(.*)"/gi, "src="+currentURL+'$1"')
 }

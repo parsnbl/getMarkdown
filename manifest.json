@@ -1,14 +1,12 @@
 {
   "manifest_version": 3,
-  "name": "Markdone",
+  "name": "getMarkdown",
   "description": "WIP",
   "version": "1.0",
   "permissions": [
     "contextMenus",
-    "offscreen",
     "clipboardWrite",
-    "activeTab",
-    "scripting"
+    "activeTab"
   ],
   "background": {
     "service_worker": "src/scripts/background.js",

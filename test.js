@@ -15,6 +15,57 @@ function parseToMd(text) {
 }
 
 
+// Need to redo this to deal with bare URLs that are < >
+
+async function fixBareUrls(mdText) {
+    const urlPatt = /\[(.*)\]\((.*)\)/;
+    const urls = mdText.match(new RegExp(urlPatt, 'ig'));
+    const cache = {}
+    for (let i=0; i< urls.length; i++ ) {
+      const elem = urls[i];
+      let vals = elem.match(new RegExp(urlPatt, 'i'));
+      let linkText = vals[1];
+      let targetUrl = vals[2];
+      if (!Object.hasOwn(cache, elem)) {
+        if (linkText === targetUrl) {
+          let title = await getPageTitle(targetUrl);
+          if (title !== -1) {
+            cache[elem] = `[${title}](${targetUrl})`
+          }
+        }
+      }
+    }
+    const finalRe = new RegExp(Object.keys(cache).join('|'), "gi");
+    mdText = mdText.replace(finalRe, function(matched) {
+      return cache[matched];
+    });
+  }
+  
+  
+
+
+async function getPageTitle(url) {
+    const response = await fetch(url, {
+      method : "GET",
+      mode: 'no-cors',
+      headers: {}
+    });
+    if (!response.ok) {
+      return -1;
+    } 
+    let text = await response.text();
+    let title = text.match(/<title>(.*)<\/title>/)[1];
+    title = replaceEncoding(title)
+    return title;
+}
+
+function replaceEncoding(text) {
+    //currently just replaces &
+    return text.replace(/&amp;/g, '&');
+}
+
+
+
 let examplePreParse = `<p>I see lots of suggested edits where a bare URL like <a href="http://www.example.org/" rel="nofollow noreferrer">http://www.example.org/</a> is replaced with text and a link like <a href="http://www.example.org/" rel="nofollow noreferrer">Example</a>.</p>
 
   <p>I personally don't find this necessary for simple URLs, and I actually like being able to plainly see where I'm going to be directed to by a link.  I realize that good browsers will assist me in knowing where the link will take me before I click it.  But I don't feel the need to obscure every URL behind link text, particularly if the link text is non-descriptive.</p>

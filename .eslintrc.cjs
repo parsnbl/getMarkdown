@@ -1,7 +1,12 @@
 module.exports = {
-  env: { browser: true, es2020: true },
+  env: { 
+    browser: true, 
+    es2020: true,
+    webextensions: true
+  },
   extends: [
     'eslint:recommended',
+    'prettier',
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
     'plugin:react-hooks/recommended',

@@ -12,10 +12,11 @@
   - https://developer.chrome.com/docs/extensions/mv3/messaging/
 
 # Issue : open multiple links
+
 https://stackoverflow.com/questions/57845546/chrome-contextmenus-how-to-get-html-instead-of-string
 
-
 ## Todos
+
 1. options.html and options.js - add options for using page title of copied links or not
 2. offscreen.html/offscreen.js - pass selection to clipboard successfully
 3. Put everything in folders

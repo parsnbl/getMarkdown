@@ -1,5 +1,6 @@
 {
   "manifest_version": 3,
+<<<<<<< HEAD
   "name": "getMarkdown",
   "description": "A no-nonsense markdown exporter for chrome.",
   "version": "1.0",
@@ -10,6 +11,18 @@
     "128": "src/assets/img/getMarkdown_128.png"
   },
   "permissions": ["contextMenus", "clipboardWrite", "activeTab"],
+=======
+  "name": "Markdone",
+  "description": "WIP",
+  "version": "1.0",
+  "permissions": [
+    "contextMenus",
+    "offscreen",
+    "clipboardWrite",
+    "activeTab",
+    "scripting"
+  ],
+>>>>>>> parent of f349f64 (mvp completed)
   "background": {
     "service_worker": "src/scripts/background.js",
     "type": "module"

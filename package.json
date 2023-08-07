@@ -1,7 +1,7 @@
 {
-  "name": "getMarkdown",
+  "name": "markdone",
   "version": "1.0.0",
-  "description": "A no-nonsense markdown exporter for chrome.",
+  "description": "A chrome extension to better export links.",
   "main": "index.js",
   "type": "module",
   "scripts": {

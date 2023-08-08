@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "getMarkdown",
+  "description": "A no-nonsense markdown exporter for chrome.",
+  "version": "1.0",
+  "icons": {
+    "16": "images/getMarkdown_16.png",
+    "32": "images/getMarkdown_32.png",
+    "48": "images/getMarkdown_48.png",
+    "128": "images/getMarkdown_128.png"
+  },
+  "permissions": ["contextMenus", "clipboardWrite", "activeTab"],
+  "background": {
+    "service_worker": "background-wrapper.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*/*"],
+      "js": ["content.bundle.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "host_permissions": ["https://*/*", "http://*/*"]
+}

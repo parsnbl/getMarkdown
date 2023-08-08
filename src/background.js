@@ -7,15 +7,7 @@ chrome.contextMenus.create(
   () => chrome.runtime.lastError,
 ); // ignore errors about an existing id
 
-// does this need to be a webworker? need to access navigator for the clipboard
-
-let contextMenuItem = {
-    "id": "markDone",
-    "title": "MarkDone",
-    "contexts": ["selection"]
-};
-
-chrome.contextMenus.create(contextMenuItem,() => chrome.runtime.lastError); // ignore errors about an existing id
+// does this need to be a webworker? need to access navigator for the clipboard // ignore errors about an existing id
 
 /*
 chrome.runtime.onInstalled.addListener(()=>{

@@ -28,7 +28,6 @@ function handleMessageBackground(request, sender, sendResponse) {
             }
         });
         */
-<<<<<<< HEAD
   }
   if (request.target === "content" && request.type === "copy-to-clipboard") {
     copyToTheClipboard(request.data);
@@ -48,11 +47,6 @@ async function copyToTheClipboard(textToCopy) {
   document.execCommand("copy");
   document.body.removeChild(el);
 }
-=======
-    }
-});
-
->>>>>>> parent of f349f64 (mvp completed)
 
 function getSelectedHtml() {
   const sel = getSelection();
@@ -76,7 +70,6 @@ function parseToMd(text) {
 }
 
 function convertRelativeURLsToAbsolute(htmlString, currentURL) {
-<<<<<<< HEAD
   return htmlString
     .replaceAll(
       /href="(?!https:\/\/|http:\/\/)(.*)"/gi,
@@ -87,7 +80,3 @@ function convertRelativeURLsToAbsolute(htmlString, currentURL) {
       "src=" + currentURL + '$1"',
     );
 }
-=======
-    return htmlString.replaceAll(/href="(?!https:\/\/|http:\/\/)(.*)"/gi, "href="+currentURL+'$1"' )
-}
->>>>>>> parent of f349f64 (mvp completed)

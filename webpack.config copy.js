@@ -20,6 +20,8 @@ export default {
     globalObject: "this",
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
+    library: "[name]",
+    libraryTarget: "umd"
   },
   plugins: [
     new webpack.ProgressPlugin(),
@@ -33,7 +35,8 @@ export default {
     }),
     new CopyPlugin({
         patterns: [
-            {
+          
+          {
                 from: "src/manifest.json",
                 to: path.join(__dirname, "dist"),
                 force: true,

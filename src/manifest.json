@@ -11,7 +11,7 @@
   },
   "permissions": ["contextMenus", "clipboardWrite", "activeTab"],
   "background": {
-    "service_worker": "background-wrapper.js",
+    "service_worker": "background.bundle.js",
     "type": "module"
   },
   "content_scripts": [

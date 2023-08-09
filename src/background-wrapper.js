@@ -1,1 +1,3 @@
-import "./background.bundle.js"
+import BackgroundModule from "./background.js";
+
+const bg = new BackgroundModule();
